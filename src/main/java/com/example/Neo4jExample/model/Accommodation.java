@@ -2,10 +2,7 @@ package com.example.Neo4jExample.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Relationship;
+import org.springframework.data.neo4j.core.schema.*;
 
 import java.util.List;
 
@@ -16,6 +13,9 @@ public class Accommodation {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Property
+    private Long accommodationId;
 
     private String name;
 

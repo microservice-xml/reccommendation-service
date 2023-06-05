@@ -16,6 +16,9 @@ public class User {
     private Long id;
 
     @Property
+    private Long userId;
+
+    @Property
     private String name;
 
 }
