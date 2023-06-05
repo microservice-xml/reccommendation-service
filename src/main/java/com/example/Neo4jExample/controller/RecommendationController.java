@@ -4,20 +4,21 @@ import com.example.Neo4jExample.model.Accommodation;
 import com.example.Neo4jExample.model.User;
 import com.example.Neo4jExample.repository.AccommodationRepository;
 import com.example.Neo4jExample.repository.UserRepository;
+import com.example.Neo4jExample.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/song")
+@RequestMapping("/recommend")
 @RequiredArgsConstructor
-public class SongController {
+public class RecommendationController {
 
     private final AccommodationRepository accommodationRepository;
+
+    private final RecommendationService recommendationService;
 
     private final UserRepository userRepository;
 
@@ -27,17 +28,13 @@ public class SongController {
         return acc;
     }
 
-    @GetMapping("/user")
-    public List<User> getAllUsers() {
-        var acc = userRepository.findAll();
-        return acc;
+    @GetMapping("/{userId}")
+    public List<Accommodation> getSimilarUsers(@PathVariable("userId") Long userId) {
+        return recommendationService.recommend(userId);
     }
 
-    @PostMapping("/")
-    public User addUser() {
-        User user = new User();
-        user.setName("Djordje Jovanovic");
-        userRepository.save(user);
-        return user;
+    @GetMapping("/")
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
