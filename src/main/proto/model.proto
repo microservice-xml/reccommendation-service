@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package communication;
+import "google/protobuf/timestamp.proto";
+
+service RecommendationService {
+  rpc recommend(RecommendationRequest) returns (RecommendationResponse);
+}
+
+message RecommendationResponse {
+  repeated int64 accommodationIds = 1;
+}
+
+message RecommendationRequest {
+  int64 userId = 1;
+}

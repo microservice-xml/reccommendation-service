@@ -28,8 +28,8 @@ public class RecommendationController {
         return acc;
     }
 
-    @GetMapping("/{userId}")
-    public List<Accommodation> getSimilarUsers(@PathVariable("userId") Long userId) {
+    @GetMapping("/recommend/{userId}")
+    public List<Accommodation> recommend(@PathVariable("userId") Long userId) {
         return recommendationService.recommend(userId);
     }
 

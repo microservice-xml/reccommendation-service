@@ -16,4 +16,10 @@ public class Rated {
 
     @TargetNode
     private User user;
+
+    public Rated () {}
+
+    public Rated(int value) {
+        this.value = value;
+    }
 }

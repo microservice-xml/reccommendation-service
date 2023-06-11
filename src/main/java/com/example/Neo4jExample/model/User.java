@@ -21,4 +21,10 @@ public class User {
     @Property
     private String name;
 
+    public User() {}
+
+    public User(Long userId, String name) {
+        this.userId = userId;
+        this.name = name;
+    }
 }
