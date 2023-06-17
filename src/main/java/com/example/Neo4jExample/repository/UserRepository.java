@@ -10,4 +10,11 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
 
     @Query("MATCH (a:Accommodation)<-[:STAYED_IN]-(u:User {userId: $0})-[r1:RATED]->(a)<-[r2:RATED]-(otherUser:User) WHERE r1.value = r2.value OR r1.value - 1 = r2.value OR r1.value + 1 = r2.value RETURN otherUser")
     public List<User> getSimilarUsers(Long userId);
+
+    @Query("MATCH (n:User) WHERE id(n)={0} DETACH DELETE n")
+    void deleteEntityWithAllRelationships(Long id);
+
+    User findByName(String name);
+
+    User findByUserId(long userId);
 }

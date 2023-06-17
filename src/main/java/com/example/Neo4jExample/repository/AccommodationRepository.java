@@ -24,4 +24,11 @@ public interface AccommodationRepository extends Neo4jRepository<Accommodation, 
             "RETURN a " +
             "ORDER BY averageGrade DESC")
     List<Accommodation> sortAccommodationsByAverageGrade(List<Long> accommodationIds);
+
+    @Query("MATCH (n:Accommodation) WHERE id(n)={0} DETACH DELETE n")
+    void deleteEntityWithAllRelationships(Long id);
+
+    Accommodation findByName(String name);
+
+    Accommodation findByAccommodationId(long accommodationId);
 }
