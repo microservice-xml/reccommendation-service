@@ -1,8 +1,22 @@
-version: '3'
+version: "3.9"
 services:
-  neo4j:
-    image: neo4j:3.5
-    restart: unless-stopped
+  recommendation-api:
+    build: .
+    restart: always
+    volumes:
+      - type: volume
+        source: local-env_shared
+        target: /home
     ports:
-      - 7474:7474
-      - 7687:7687
+      - 9113:9113
+    environment:
+      - RESERVATION_API_GRPC_ADDRESS=reservation-api
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-accommodation:3306/accommodationdb
+
+networks:
+  default:
+    name: local-env_default
+
+volumes:
+  local-env_shared:
+    external: true
